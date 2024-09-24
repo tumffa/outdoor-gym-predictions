@@ -44,6 +44,8 @@ for weather_csv_file in weather_csv_files:
     
     if 'snow_depth_cm' in weather_df.columns:
         weather_df['snow_depth_cm'] = weather_df['snow_depth_cm'].interpolate(method='nearest', limit_direction='both')
+        # Change all -1 to 0
+        weather_df['snow_depth_cm'] = weather_df['snow_depth_cm'].replace(-1, 0)
 
     # Save the processed weather data to a new CSV file
     output_csv_file = f"./processed_data/processed_{weather_csv_file}"

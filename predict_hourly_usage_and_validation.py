@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Load the data
-files = ["./processed_data/combined_hourly_processed_espoo_weather.csv", "./processed_data/combined_hourlyprocessed_helsinkivantaa_weather.csv", "./processed_data/combined_hourlyprocessed_kumpula_weather.csv"]
+files = ["./processed_data/combined_hourly_processed_espoo_weather.csv", "./processed_data/combined_hourly_processed_helsinkivantaa_weather.csv", "./processed_data/combined_hourly_processed_kumpula_weather.csv"]
 aggregated_df = pd.read_csv(files[0])
 
 # Filter only Hietaniemi
@@ -15,13 +15,14 @@ aggregated_df = aggregated_df[aggregated_df['area'] == 'Hietaniemi']
 # Convert localtime to datetime
 aggregated_df['localtime'] = pd.to_datetime(aggregated_df['localtime'])
 
-# train on 8 first months of 2022 and 2024 and test on 8 first months of 2023
-train_df = aggregated_df[(aggregated_df['localtime'].dt.year == 2022) & (aggregated_df['localtime'].dt.month <= 8) |
-                            (aggregated_df['localtime'].dt.year == 2024) & (aggregated_df['localtime'].dt.month <= 8)]
-test_df = aggregated_df[(aggregated_df['localtime'].dt.year == 2023) & (aggregated_df['localtime'].dt.month <= 8)]
+# Training 2022 and 2023
+# test 2024
+# summer months
+train_df = aggregated_df[(aggregated_df['localtime'].dt.year == 2022) | (aggregated_df['localtime'].dt.year == 2023)]
+test_df = aggregated_df[aggregated_df['localtime'].dt.year == 2024]
 
 train_columns = ['week_of_year', 'hour', 'day_of_week', 'temperature_c', 'precipitation_mm']
-if 'snow_depth_cm' in train_df.columns:
+if 'snow_depth_cm' in aggregated_df.columns:
     train_columns.append('snow_depth_cm')
 
 # Prepare the features and target variable for training
@@ -72,7 +73,7 @@ r2 = r2_score(y_test, y_pred)
 print('Mean Squared Error (without weather): %.2f' % mse)
 print('Coefficient of Determination: %.2f' % r2)
 
-# Predict till 1.9.2024
+# Train with 2021-2023 and predict 2023
 predict_df_weather = aggregated_df[(aggregated_df['localtime'].dt.year == 2023) & (aggregated_df['localtime'].dt.month <= 8)]
 X_predict = predict_df_weather[train_columns]
 predict_df_weather['predicted_minutes'] = model_weather.predict(X_predict)
@@ -129,7 +130,7 @@ def plot_weather_and_usage(weeks, days, year):
             plt.show()
 
 # Example: Plot predicted hourly usage for multiple weeks and days
-weeks = [3]  # Week numbers
-days = [1, 2, 3, 4, 5]  # 1 for Monday, 2 for Tuesday, etc.
+weeks = [0, 5, 10, 15, 20, 25, 30]
+days = [0]
 year = 2023
 plot_weather_and_usage(weeks, days, year)
