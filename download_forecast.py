@@ -8,26 +8,27 @@ from fmiopendata.wfs import download_stored_query
 # the hours below might be necessary to get any data
 # Create datetime objects for the specified times IN FINNISH TIME
 # Choose day and month for the daily forecast
+year = 2024
 month = 9
 day = 25
 hour1 = 0
 hour2 = 0
-start_time = datetime(2024, month, day, hour1, 0, 0)
-end_time = datetime(2024, month, day+1, hour2, 0, 0)
+start_time = datetime(year, month, day, hour1, 0, 0)
+end_time = datetime(year, month, day+1, hour2, 0, 0)
 #convert to UTC
 start_time = start_time - timedelta(hours=3)
 end_time = end_time - timedelta(hours=3)
 
 # Tapiola, Espoo (next to Hietaniemi)
 # BOUNDING BOX (coordinates) bbox = $$c(E 24°44'12"--E 24°51'12"/N 60°12'30"--N 60°09'24")
-# you can use https://boundingbox.klokantech.com/ to get the bounding box
+# from https://boundingbox.klokantech.com/
 bbox = "24.76639,60.21111,24.86083,60.34444"
 
 if not os.path.exists("./forecasts"):
     os.makedirs("./forecasts")
 
 # Create new folder or delete all previous /forecasts/DDMM files
-folder = f"./forecasts/d{day:02d}m{month:02d}"
+folder = f"./forecasts/d{day:02d}m{month:02d}y{year}"
 if not os.path.exists(folder):
     os.makedirs(folder)
 else:

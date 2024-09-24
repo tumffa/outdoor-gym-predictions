@@ -2,16 +2,15 @@ import os
 import glob
 import numpy as np
 
-# Directory containing the CSV files
-folder = 'forecasts'
-if not os.path.exists(folder):
-    os.makedirs(folder)
+def precipitation_by_date(day, month, year):
+    folder = f'./forecasts/d{day:02d}m{month:02d}y{year}'
+    precipitation = precipitation_by_folder(folder)
+    return precipitation
 
-# Iterate over each folder in the directory
-for directory in os.listdir(folder):
-    print(f"\nProcessing day: {directory}")
+def precipitation_by_folder(folder):
+    print(f"\nProcessing day: {folder}")
     # List all CSV files in the directory
-    csv_files = glob.glob(os.path.join(folder, directory, '*.csv'))
+    csv_files = glob.glob(os.path.join(folder, '*.csv'))
 
     # Initialize a dictionary to store precipitation data by hour
     hourly_data = {}
@@ -53,9 +52,19 @@ for directory in os.listdir(folder):
     for i in range(1, len(hour)):
         hourly_precipitation.append(abs(hour[i][1] - hour[i-1][1]))
 
-    for i in range(len(hourly_precipitation)):
-        print(f"{i}: {hourly_precipitation[i]:.2f} mm")
+    return hourly_precipitation
 
-    # Calculate the total precipitation for the day
-    total_precipitation = np.sum(hourly_precipitation)
-    print(f"Total precipitation for the day: {total_precipitation:.2f} mm")
+def main():
+    # Directory containing the CSV files
+    folder = './forecasts'
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    # Process each day's precipitation data
+    for day_folder in os.listdir(folder):
+        prec = precipitation_by_folder(os.path.join(folder, day_folder))
+        for i in range(len(prec)):
+            print(f"Hour {i+1}: {prec[i]:.2f} mm")
+        print(f"Total precipitation: {sum(prec):.2f} mm")
+
+if __name__ == "__main__":
+    main()

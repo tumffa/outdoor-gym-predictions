@@ -2,6 +2,7 @@ from sklearn.linear_model import Ridge
 from sklearn.preprocessing import StandardScaler, PolynomialFeatures
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import mean_squared_error, r2_score
+from calc_precipitation_test import precipitation_by_date
 import matplotlib.pyplot as plt
 import pandas as pd
 
