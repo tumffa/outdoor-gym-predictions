@@ -130,7 +130,7 @@ def plot_weather_and_usage(weeks, days, year):
             plt.show()
 
 # Example: Plot predicted hourly usage for multiple weeks and days
-weeks = [0, 5, 10, 15, 20, 25, 30]
-days = [0]
+weeks = [20, 25, 30]
+days = [0, 1, 2]
 year = 2023
 plot_weather_and_usage(weeks, days, year)

@@ -1,5 +1,9 @@
+import os
 import pandas as pd
 
+if not os.path.exists("./processed_data"):
+    os.makedirs("./processed_data")
+    
 # Load the data
 hourly_csv_file = "./processed_data/combined_sorted_hourly_data.csv"
 hourly_df = pd.read_csv(hourly_csv_file)

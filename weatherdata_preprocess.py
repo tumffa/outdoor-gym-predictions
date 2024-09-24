@@ -1,4 +1,8 @@
+import os
 import pandas as pd
+
+if not os.path.exists("./processed_data"):
+    os.makedirs("./processed_data")
 
 # Load the weather data
 weather_csv_files = ["espoo_weather.csv", "helsinkivantaa_weather.csv", "kumpula_weather.csv"]
