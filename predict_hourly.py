@@ -28,14 +28,14 @@ def predict(date):
     df['total_minutes'] = model.predict(df[['week_of_year', 'hour', 'day_of_week', 'precipitation_mm']])
     return df
 
-def plot_predictions(df):
+def plot_predictions(df, date):
     # Plot the predicted total minutes for each hour of the day
     plt.figure(figsize=(12, 6))
     plt.plot(df['hour'], df['total_minutes'], marker='o', label='Predicted Total Minutes', color='red')
     plt.plot(df['precipitation_mm']*100, marker='o', label='Precipitation (mm) * 100', color='blue')
     plt.xlabel('Hour of the Day')
     plt.ylabel('Total Minutes')
-    plt.title('Predicted Total Minutes for Each Hour of the Day')
+    plt.title(f'Predicted Total Minutes for {date.day}.{date.month}.{date.year}')
     plt.legend()
     plt.grid(True)
     plt.show()
@@ -43,4 +43,4 @@ def plot_predictions(df):
 if __name__ == "__main__":
     date = dt.datetime(2024, 9, 25)
     df = predict(date)
-    plot_predictions(df)
+    plot_predictions(df, date)

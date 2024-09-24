@@ -6,7 +6,9 @@ import pandas as pd
 
 def train_model():
     # Load the data
-    files = ["./processed_data/combined_hourly_processed_espoo_weather.csv", "./processed_data/combined_hourly_processed_helsinkivantaa_weather.csv", "./processed_data/combined_hourly_processed_kumpula_weather.csv"]
+    files = ["./processed_data/combined_hourly_processed_espoo_weather.csv",
+              "./processed_data/combined_hourly_processed_helsinkivantaa_weather.csv",
+                "./processed_data/combined_hourly_processed_kumpula_weather.csv"]
     aggregated_df = pd.read_csv(files[0])
 
     # Filter only Hietaniemi
