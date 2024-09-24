@@ -13,3 +13,11 @@ or
 
 For predictions + tests, run:
 - predict_hourly_usage_and_validation.py
+
+For weather forecasts:
+```bash
+pip install fmiopendata
+pip install eccodes
+```
+- Run download_forecast.py to download forecast for a given day and hour range
+- Run calc_precipitation_test.py to calculate the precipitation for all day forecasts
