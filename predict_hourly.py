@@ -41,6 +41,6 @@ def plot_predictions(df, date):
     plt.show()
 
 if __name__ == "__main__":
-    date = dt.datetime(2024, 9, 25)
+    date = dt.datetime(2024, 10, 1)
     df = predict(date)
     plot_predictions(df, date)

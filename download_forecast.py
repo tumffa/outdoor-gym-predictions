@@ -9,8 +9,8 @@ from fmiopendata.wfs import download_stored_query
 # Create datetime objects for the specified times IN FINNISH TIME
 # Choose day and month for the daily forecast
 year = 2024
-month = 9
-day = 25
+month = 10
+day = 1
 hour1 = 0
 hour2 = 0
 start_time = datetime(year, month, day, hour1, 0, 0)

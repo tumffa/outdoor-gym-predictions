@@ -12,7 +12,7 @@ def train_model():
     aggregated_df = pd.read_csv(files[0])
 
     # Filter only Hietaniemi
-    aggregated_df = aggregated_df[aggregated_df['area'] == 'Hietaniemi']
+    aggregated_df = aggregated_df[aggregated_df['area'] == 'Paloheinä']
 
     # Convert localtime to datetime
     aggregated_df['localtime'] = pd.to_datetime(aggregated_df['localtime'])

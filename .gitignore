@@ -1,3 +1,2 @@
-/forecasts
-/processed_data
 **__pycache__**
+*.Identifier

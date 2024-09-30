@@ -11,7 +11,7 @@ files = ["./processed_data/combined_hourly_processed_espoo_weather.csv", "./proc
 aggregated_df = pd.read_csv(files[0])
 
 # Filter only Hietaniemi
-aggregated_df = aggregated_df[aggregated_df['area'] == 'Hietaniemi']
+aggregated_df = aggregated_df[aggregated_df['area'] == 'Paloheinä']
 
 # Convert localtime to datetime
 aggregated_df['localtime'] = pd.to_datetime(aggregated_df['localtime'])
@@ -131,7 +131,7 @@ def plot_weather_and_usage(weeks, days, year):
             plt.show()
 
 # Example: Plot predicted hourly usage for multiple weeks and days
-weeks = [20, 25, 30]
-days = [0, 1, 2]
-year = 2023
+weeks = [39]
+days = [2]
+year = 2024
 plot_weather_and_usage(weeks, days, year)
